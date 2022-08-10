@@ -3,7 +3,7 @@
  * @Date: 2020-08-18 21:36:31
  * @Author: zouzheng
  * @LastEditors: zhanwei
- * @LastEditTime: 2022-08-10 10:39:59
+ * @LastEditTime: 2022-08-10 15:05:25
  */
 const path = require('path')
 const fs = require('fs')
@@ -113,24 +113,24 @@ const fileRead = (filedir) => {
  * @param {String} i/请求次数，超过三次不再请求
  * @return {type}
  */
-const translate = (zh, lang, i = 0) => {
-    return new Promise((resolve, reject) => {
-        axios
-            .get('http://fanyi.youdao.com/translate', {
-                params: {
-                    doctype: 'json',
-                    type: language[lang] || language['en'],
-                    i: zh,
-                },
-            })
-            .then(async (res) => {
-                resolve(res.data.translateResult[0][0].tgt)
-            })
-            .catch((err) => {
-                reject(err)
-            })
-    })
-}
+// const translate = (zh, lang, i = 0) => {
+//     return new Promise((resolve, reject) => {
+//         axios
+//             .get('http://fanyi.youdao.com/translate', {
+//                 params: {
+//                     doctype: 'json',
+//                     type: language[lang] || language['en'],
+//                     i: zh,
+//                 },
+//             })
+//             .then(async (res) => {
+//                 resolve(res.data.translateResult[0][0].tgt)
+//             })
+//             .catch((err) => {
+//                 reject(err)
+//             })
+//     })
+// }
 
 /**
  * @description: 语言抽离并写入中文json文件
@@ -181,8 +181,9 @@ const pikazI18nTranslate = async (zh, en, lang = 'en') => {
         }
     })
     for (let i = 0; i < key.length; i++) {
-        const e = await translate(key[i], lang)
-        enJson[key[i]] = e
+        // const e = await translate(key[i], lang)
+        // enJson[key[i]] = e
+        enJson[key[i]] = key[i]
     }
     return new Promise((resolve, reject) => {
         const err = fs.writeFileSync(enPath, JSON.stringify(enJson), 'utf8')
