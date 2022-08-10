@@ -1,6 +1,6 @@
 {
     "name": "xw-i18n-translate",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Generate i18N language files",
     "private": false,
     "main": "lib/pikaz-translate.js",
